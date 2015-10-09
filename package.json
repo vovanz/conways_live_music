@@ -1,0 +1,18 @@
+{
+  "name": "conways_live_music",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "stylus": "~0.52.4",
+    "browserify": "~11.2.0",
+    "uglify": "~0.1.5",
+    "es6ify": "~1.6.0",
+    "watchify": "~3.4.0"
+  }
+}
