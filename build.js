@@ -6,13 +6,17 @@ var babelify = require("babelify");
 
 
 function buildJS(debug) {
-    var b = browserify([], {debug: debug});
-    b.transform(babelify.configure({
-        optional: ['runtime']
-    }));
-    b.add('./src/js/main.js');
-    b.bundle().pipe(fs.createWriteStream('./dist/bundle.js'));
-    console.log('browserifying complete')
+    try {
+        var b = browserify([], {debug: debug});
+        b.transform(babelify.configure({
+            optional: ['runtime']
+        }));
+        b.add('./src/js/main.js');
+        b.bundle().pipe(fs.createWriteStream('./dist/bundle.js'));
+        console.log('browserifying complete')
+    } catch(err) {
+        console.log(err);
+    }
 }
 
 function buildLESS(debug) {
