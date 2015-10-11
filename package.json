@@ -13,8 +13,11 @@
     "stylus": "~0.52.4",
     "browserify": "~11.2.0",
     "uglify": "~0.1.5",
-    "es6ify": "~1.6.0",
     "watchify": "~3.4.0",
     "less": "~2.5.3"
+  },
+  "scripts": {
+    "build": "mkdir -p ./dist ; node ./build.js > ./dist/bundle.js & less ./src/less/main.less > ./dist/styles.css",
+    "watch": "mkdir -p ./dist ; node ./watch.js"
   }
 }
