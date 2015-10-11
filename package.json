@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "build": "node ./build.js",
-    "watch": "node ./watch.js"
+    "build": "mkdir -p ./dist ; node ./build",
+    "watch": "mkdir -p ./dist ; node ./watch.js"
   },
   "author": "",
   "license": "BSD-2-Clause",
@@ -14,10 +14,8 @@
     "browserify": "~11.2.0",
     "uglify": "~0.1.5",
     "watchify": "~3.4.0",
-    "less": "~2.5.3"
-  },
-  "scripts": {
-    "build": "mkdir -p ./dist ; node ./build.js > ./dist/bundle.js & less ./src/less/main.less > ./dist/styles.css",
-    "watch": "mkdir -p ./dist ; node ./watch.js"
+    "less": "~2.5.3",
+    "regenerator": "~0.8.41",
+    "babel-runtime": "~5.8.25"
   }
 }
