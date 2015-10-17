@@ -25,17 +25,16 @@ class Cell {
     set y(value) {
         throw new Error('Cells are immutable')
     }
-
-    equal(cell) {
-        if (!Cell.is_cell(cell)) {
-            throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
-        }
-        return (this.x == cell.x) && (this.y == cell.y)
-    }
 }
 
-Cell.is_cell = function (obj) {
-    return obj instanceof Cell
-};
+var cells_by_x = new Map();
 
-module.exports = Cell;
+module.exports = function (x, y) {
+    if (!cells_by_x.has(x)) {
+        cells_by_x.set(x, new Map())
+    }
+    if (!cells_by_x.get(x).has(y)) {
+        cells_by_x.get(x).set(y, new Cell(x, y))
+    }
+    return cells_by_x.get(x).get(y)
+};
