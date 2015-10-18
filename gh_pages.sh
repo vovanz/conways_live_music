@@ -5,5 +5,5 @@ git merge master
 npm run build
 git add ./dist/*
 git commit -m 'build'
-git push --all -u
+git push
 git checkout master
