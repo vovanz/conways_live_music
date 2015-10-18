@@ -13,30 +13,29 @@ class ExtendedSet extends Set {
             this.delete(obj)
         }
     }
-}
 
-ExtendedSet.union = function (...extended_sets) {
-    let result = new ExtendedSet();
-    let extended_set;
-    for (extended_set of extended_sets) {
-        result.update(extended_set)
+    static union(...extended_sets) {
+        let result = new ExtendedSet();
+        let extended_set;
+        for (extended_set of extended_sets) {
+            result.update(extended_set)
+        }
+        return result
     }
-    return result
-};
 
-ExtendedSet.intersect = function (base_set, ...extended_sets) {
-    let result = new ExtendedSet(base_set);
-    let extended_set;
-    for (extended_set of extended_sets) {
-        let obj;
-        for (obj of result) {
-            if (!extended_set.has(obj)) {
-                result.delete(obj)
+    static intersect(base_set, ...extended_sets) {
+        let result = new ExtendedSet(base_set);
+        let extended_set;
+        for (extended_set of extended_sets) {
+            let obj;
+            for (obj of result) {
+                if (!extended_set.has(obj)) {
+                    result.delete(obj)
+                }
             }
         }
+        return result
     }
-    return result
-};
-
+}
 
 module.exports = ExtendedSet;
