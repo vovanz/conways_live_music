@@ -1,4 +1,4 @@
 var build = require('./builder.js');
 
-buildJS(false);
-buildLESS(false);
+build.buildJS(false);
+build.buildLESS(false);
