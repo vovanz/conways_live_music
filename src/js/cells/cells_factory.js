@@ -1,11 +1,16 @@
 var X = Symbol();
 var Y = Symbol();
+var factory_sign = Symbol();
 
 class Cell {
-    constructor(x, y) {
+    constructor(x, y, sign) {
         if (!(Number.isInteger(x)) || !(Number.isInteger(y))) {
             throw new Error('You must specify correct coordinates')
         }
+        if (sign != factory_sign) {
+            throw new Error('Cells cannot be created directly')
+        }
+
         this[X] = x;
         this[Y] = y;
     }
@@ -34,7 +39,7 @@ module.exports = function (x, y) {
         cells_by_x.set(x, new Map())
     }
     if (!cells_by_x.get(x).has(y)) {
-        cells_by_x.get(x).set(y, new Cell(x, y))
+        cells_by_x.get(x).set(y, new Cell(x, y, factory_sign))
     }
     return cells_by_x.get(x).get(y)
 };
