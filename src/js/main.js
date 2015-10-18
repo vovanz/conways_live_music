@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var cells_factory = require('./cells/cells_factory.js');
+var cells_factory = require('./cells.js').cells_factory;
 var View = require('./view.js');
 
 $(() => {
