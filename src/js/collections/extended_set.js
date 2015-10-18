@@ -1,23 +1,20 @@
 class ExtendedSet extends Set {
 
     update(objects) {
-        let obj;
-        for (obj of objects) {
+        for (let obj of objects) {
             this.add(obj)
         }
     }
 
     diff_update(objects) {
-        let obj;
-        for (obj of objects) {
+        for (let obj of objects) {
             this.delete(obj)
         }
     }
 
     static union(...extended_sets) {
         let result = new ExtendedSet();
-        let extended_set;
-        for (extended_set of extended_sets) {
+        for (let extended_set of extended_sets) {
             result.update(extended_set)
         }
         return result
@@ -25,10 +22,8 @@ class ExtendedSet extends Set {
 
     static intersect(base_set, ...extended_sets) {
         let result = new ExtendedSet(base_set);
-        let extended_set;
-        for (extended_set of extended_sets) {
-            let obj;
-            for (obj of result) {
+        for (let extended_set of extended_sets) {
+            for (let obj of result) {
                 if (!extended_set.has(obj)) {
                     result.delete(obj)
                 }
