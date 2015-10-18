@@ -16,6 +16,7 @@
     "watchify": "~3.4.0",
     "less": "~2.5.3",
     "regenerator": "~0.8.41",
-    "babel-runtime": "~5.8.25"
+    "babel-runtime": "~5.8.25",
+    "jquery": "~2.1.4"
   }
 }

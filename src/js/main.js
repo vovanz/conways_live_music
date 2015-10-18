@@ -1,21 +1,19 @@
+var $ = require('jquery');
 var cells_factory = require('./cells/cells_factory.js');
-var ExtendedSet = require('./collections/extended_set.js');
+var View = require('./view.js');
 
-var a = cells_factory(1,2);
-var b = cells_factory(3,2);
-var c = cells_factory(1,2);
-var d = cells_factory(1,3);
+$(() => {
+    var view = new View('#grid', 20, 20);
 
-console.log(a != b);
-console.log(a == c);
-
-var test_set = new ExtendedSet();
-
-test_set.add(a);
-
-console.log(test_set.has(c));
-
-var test_set2 = new ExtendedSet([b, c, d]);
-
-console.log(ExtendedSet.union(test_set, test_set2));
-console.log(ExtendedSet.intersect(test_set, test_set2));
+    var cells = [
+        cells_factory(10, 10),
+        cells_factory(11, 11),
+        cells_factory(9, 12),
+        cells_factory(10, 12),
+        cells_factory(11, 12)
+    ];
+    for (let cell of cells) {
+        view.cell_views.get(cell).addClass('alive');
+    }
+    view.cell_views.get(cells_factory(9, 12)).addClass('active');
+});

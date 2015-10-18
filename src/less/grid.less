@@ -1,0 +1,28 @@
+@import "colors";
+
+#grid {
+  position: relative;
+  display: inline-block;
+  border: 5px solid @color-border;
+  border-radius: 15px;
+  padding: 5px;
+  .row {
+    clear: both;
+    .cell {
+      float: left;
+      background-color: @color-disabled;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      margin: 5px;
+      border-radius: 5px;
+    }
+    .alive {
+      background-color: @color-enabled;
+      box-shadow: 0 0 5px 1px @color-enabled;
+    }
+    .active {
+      box-shadow: 0 0 5px 4px @color-enabled;
+    }
+  }
+}
