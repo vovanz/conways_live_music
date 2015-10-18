@@ -21,7 +21,6 @@ class View {
         this.cell_views = new Map();
         this.container = $(selector);
         this.cols = [];
-        console.log(this.container);
         for (let x = 0; x < width; x++) {
             let col = this.add_col(x);
             for (let y = 0; y < height; y++) {
