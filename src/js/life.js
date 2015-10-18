@@ -1,31 +1,38 @@
-var ExtendedSet = require('./collections/extended_set.js');
+var CellsSet = require('./cells/cells_set.js');
 
 class Life {
     constructor(cells_set) {
         this.state = cells_set;
+        this.born = cells_set;
+        this.died = new CellsSet()
     }
 
     next_state() {
-        this.born = new ExtendedSet();
-        this.died = new ExtendedSet();
+        this.born = new CellsSet();
+        this.died = new CellsSet();
         for (let cell of this.state) {
-            let alive_neighbours = ExtendedSet.intersect(cell.neighbours, this.state);
-            if (alive_neighbours.size < 2 || alive_neighbours > 3) {
+            let alive_neighbours = CellsSet.intersect(cell.neighbours, this.state);
+            if (alive_neighbours.size < 2 || alive_neighbours.size > 3) {
                 this.died.add(cell)
             }
-            let all_neighbours = cell.neighbours;
-            let dead_neighbours = all_neighbours.diff_update(alive_neighbours);
-            for (let dead_neighbour of dead_neighbours) {
-                let parents = ExtendedSet.intersect(dead_neighbour.neighbours, this.state)
-                if (parents.size == 3) {
-                    this.born.add(dead_neighbour)
-                }
+            this.born.update(cell.neighbours)
+        }
+        for (let cell of this.born) {
+            let alive_neighbours = CellsSet.intersect(cell.neighbours, this.state);
+            if (alive_neighbours.size != 3) {
+                this.born.delete(cell)
             }
         }
         this.prev_state = this.state;
-        this.state = new ExtendedSet(this.state);
-        this.state.update(this.born);
-        this.state.diff_update(this.died);
+        this.state = CellsSet.union(this.state, this.born).diff_update(this.died);
         return this.state
     }
+
+    revert() {
+        if (typeof this.prev_state != 'undefined') {
+            this.state = this.prev_state
+        }
+    }
 }
+
+module.exports = Life;

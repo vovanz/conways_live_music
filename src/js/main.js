@@ -1,22 +1,22 @@
 var $ = require('jquery');
-var cells_factory = require('./cells.js').cells_factory;
+var cells_factory = require('./cells/cell.js').cells_factory;
 var View = require('./view.js');
+var Life = require('./life.js');
+var CellsSet = require('./cells/cells_set.js');
 
 $(() => {
-    var view = new View('#grid', 20, 20);
-
-    var cells = [
+    var glider = [
         cells_factory(10, 10),
         cells_factory(11, 11),
         cells_factory(9, 12),
         cells_factory(10, 12),
         cells_factory(11, 12)
     ];
-    for (let cell of cells) {
-        view.cell_views.get(cell).addClass('alive');
-    }
-    view.set_active_col(9);
-    setInterval(function() {
+
+    var life = new Life(new CellsSet(glider));
+    var view = new View('#grid', life, 20, 20);
+
+    setInterval(function () {
         view.inc_active_col()
     }, 200);
 });

@@ -1,8 +1,6 @@
-var ExtendedSet = require('./collections/extended_set.js');
-
-
 var X = Symbol();
 var Y = Symbol();
+var NEIGHBOURS = Symbol();
 var factory_sign = Symbol();
 
 
@@ -48,16 +46,26 @@ class Cell {
     }
 
     get neighbours() {
-        let neighbours = new ExtendedSet();
+        if (typeof this[NEIGHBOURS] == 'undefined') {
+            this.create_neighbours()
+        }
+        return new Set(this[NEIGHBOURS])
+    }
+
+    set neighbours(value) {
+        throw new Error('Cells are immutable')
+    }
+
+    create_neighbours() {
+        this[NEIGHBOURS] = new Set();
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
-                let cell = cells_factory(i, j);
+                let cell = cells_factory(this.x+i, this.y+j);
                 if (cell != this) {
-                    neighbours.add(cell);
+                    this[NEIGHBOURS].add(cell);
                 }
             }
         }
-        return neighbours
     }
 }
 
