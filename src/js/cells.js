@@ -6,6 +6,7 @@ var Y = Symbol();
 var factory_sign = Symbol();
 
 
+var cells_by_x = new Map();
 var cells_factory = function (x, y) {
     if (!cells_by_x.has(x)) {
         cells_by_x.set(x, new Map())
@@ -48,10 +49,10 @@ class Cell {
 
     get neighbours() {
         let neighbours = new ExtendedSet();
-        for(let i = -1; i < 2; i++) {
-            for(let j = -1; j < 2; j++) {
+        for (let i = -1; i < 2; i++) {
+            for (let j = -1; j < 2; j++) {
                 let cell = cells_factory(i, j);
-                if(cell != this) {
+                if (cell != this) {
                     neighbours.add(cell);
                 }
             }
@@ -59,8 +60,6 @@ class Cell {
         return neighbours
     }
 }
-
-var cells_by_x = new Map();
 
 module.exports = {
     cells_factory: cells_factory,
