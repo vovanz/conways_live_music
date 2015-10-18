@@ -10,9 +10,9 @@ class View {
         this.cell_views.set(cell, cell_view);
     }
 
-    add_row(y) {
+    add_col(x) {
         let row = $('<div />');
-        row.addClass('row');
+        row.addClass('col');
         row.appendTo(this.container);
         return row
     }
@@ -21,9 +21,9 @@ class View {
         this.cell_views = new Map();
         this.container = $(selector);
         console.log(this.container);
-        for (let y = 0; y < height; y++) {
-            let row = this.add_row(y);
-            for (let x = 0; x < width; x++) {
+        for (let x = 0; x < width; x++) {
+            let row = this.add_col(x);
+            for (let y = 0; y < height; y++) {
                 this.create_cell(row, x, y)
             }
         }
