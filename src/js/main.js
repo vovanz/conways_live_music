@@ -15,5 +15,5 @@ $(() => {
     for (let cell of cells) {
         view.cell_views.get(cell).addClass('alive');
     }
-    view.cell_views.get(cells_factory(9, 12)).addClass('active');
+    view.cols[9].addClass('active');
 });

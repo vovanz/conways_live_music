@@ -6,10 +6,10 @@
   border: 5px solid @color-border;
   border-radius: 15px;
   padding: 5px;
-  .row {
-    clear: both;
+  .col {
+    float: left;
     .cell {
-      float: left;
+      clear: both;
       background-color: @color-disabled;
       width: 20px;
       height: 20px;
@@ -21,7 +21,12 @@
       background-color: @color-enabled;
       box-shadow: 0 0 5px 1px @color-enabled;
     }
-    .active {
+  }
+  .active {
+    .cell {
+      box-shadow: 0 0 5px 1px @color-disabled;
+    }
+    .alive {
       box-shadow: 0 0 5px 4px @color-enabled;
     }
   }

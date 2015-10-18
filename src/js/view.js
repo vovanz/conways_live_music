@@ -2,30 +2,32 @@ var $ = require('jquery');
 var cells_factory = require('./cells/cells_factory.js');
 
 class View {
-    create_cell(row, x, y) {
+    create_cell(col, x, y) {
         let cell_view = $('<div />');
         let cell = cells_factory(x, y);
         cell_view.addClass('cell');
-        cell_view.appendTo(row);
+        cell_view.appendTo(col);
         this.cell_views.set(cell, cell_view);
     }
 
-    add_row(y) {
-        let row = $('<div />');
-        row.addClass('row');
-        row.appendTo(this.container);
-        return row
+    add_col(x) {
+        let col = $('<div />');
+        col.addClass('col');
+        col.appendTo(this.container);
+        return col
     }
 
     constructor(selector, width, height) {
         this.cell_views = new Map();
         this.container = $(selector);
+        this.cols = [];
         console.log(this.container);
-        for (let y = 0; y < height; y++) {
-            let row = this.add_row(y);
-            for (let x = 0; x < width; x++) {
-                this.create_cell(row, x, y)
+        for (let x = 0; x < width; x++) {
+            let col = this.add_col(x);
+            for (let y = 0; y < height; y++) {
+                this.create_cell(col, x, y)
             }
+            this.cols.push(col)
         }
     }
 }
