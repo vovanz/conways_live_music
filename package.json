@@ -12,11 +12,12 @@
   "devDependencies": {
     "stylus": "~0.52.4",
     "browserify": "~11.2.0",
-    "uglify": "~0.1.5",
     "watchify": "~3.4.0",
     "less": "~2.5.3",
     "regenerator": "~0.8.41",
     "babel-runtime": "~5.8.25",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "uglifyify": "~3.0.1",
+    "uglify-js": "~2.5.0"
   }
 }

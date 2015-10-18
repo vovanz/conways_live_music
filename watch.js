@@ -1,5 +1,5 @@
 var watch = require('watch');
-var build = require('./build.js');
+var build = require('./builder.js');
 
 watch.watchTree('./src/js/', function (f, curr, prev) {
     build.buildJS(true)
