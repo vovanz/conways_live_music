@@ -16,4 +16,7 @@ $(() => {
         view.cell_views.get(cell).addClass('alive');
     }
     view.set_active_col(9);
+    setInterval(function() {
+        view.inc_active_col()
+    }, 200);
 });

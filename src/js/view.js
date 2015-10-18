@@ -35,18 +35,20 @@ class View {
         this.grid.find('.col.active').removeClass('active');
         this.cols[x].addClass('active');
         this.active_col = x;
+        return this.active_col
     }
 
-    inc_active_col(x) {
-        if(typeof this.active_col != 'undefined') {
-            this.active_col = 0
+    inc_active_col() {
+        let x;
+        if (typeof this.active_col == 'undefined') {
+            x = 0
         } else {
-            this.active_col++
+            x = this.active_col + 1
         }
-        if (this.active_col >= this.width) {
-            this.active_col = 0;
+        if (x >= this.width) {
+            x = 0;
         }
-        return this.active_col
+        return this.set_active_col(x)
     }
 
 }
