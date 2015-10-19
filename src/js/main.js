@@ -14,7 +14,14 @@ $(() => {
         cells_factory(11, 11),
         cells_factory(9, 12),
         cells_factory(10, 12),
-        cells_factory(11, 12)
+        cells_factory(11, 12),
+
+        cells_factory(1, 0),
+        cells_factory(2, 1),
+        cells_factory(0, 2),
+        cells_factory(1, 2),
+        cells_factory(2, 2)
+
     ];
 
     var life = new Life(new CellsSet(glider));
