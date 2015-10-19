@@ -49,7 +49,7 @@ class Cell {
         if (typeof this[NEIGHBOURS] == 'undefined') {
             this.create_neighbours()
         }
-        return new Set(this[NEIGHBOURS])
+        return this[NEIGHBOURS]
     }
 
     set neighbours(value) {
@@ -74,5 +74,4 @@ module.exports = {
     is_cell: function (obj) {
         return obj instanceof Cell
     }
-}
-;
+};

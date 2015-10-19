@@ -38,8 +38,10 @@ class CellsSet {
         if (!this.cells_by_x.has(cell.x)) {
             this.cells_by_x.set(cell.x, new Set())
         }
-        this.cells_by_x.get(cell.x).add(cell);
-        this[SIZE]++
+        if (!this.cells_by_x.get(cell.x).has(cell)) {
+            this.cells_by_x.get(cell.x).add(cell);
+            this[SIZE]++
+        }
     }
 
     has(cell) {

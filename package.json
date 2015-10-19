@@ -10,14 +10,15 @@
   "author": "",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "stylus": "~0.52.4",
     "browserify": "~11.2.0",
-    "watchify": "~3.4.0",
     "less": "~2.5.3",
     "regenerator": "~0.8.41",
     "babel-runtime": "~5.8.25",
     "jquery": "~2.1.4",
     "uglifyify": "~3.0.1",
-    "uglify-js": "~2.5.0"
+    "uglify-js": "~2.5.0",
+    "less-plugin-clean-css": "~1.5.1",
+    "babelify": "~6.3.0",
+    "watch": "~0.16.0"
   }
 }
