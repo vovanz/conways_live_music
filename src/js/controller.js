@@ -1,7 +1,8 @@
 class Controller {
-    constructor(life, view, width) {
+    constructor(life, view, player, width) {
         this.life = life;
         this.view = view;
+        this.player = player;
         this.width = width;
         this.active_col = -1;
         for (let cell of this.life.state) {
@@ -15,6 +16,12 @@ class Controller {
             for (let cell of this.life.born.cells_by_x.get(x)) {
                 this.view.show_alive(cell)
             }
+        }
+    }
+
+    play_cells(x) {
+        if (this.life.state.cells_by_x.has(x)) {
+            this.player.play_cells(x, this.life.state.cells_by_x.get(x))
         }
     }
 
@@ -34,6 +41,7 @@ class Controller {
             this.life.next_state();
             this.active_col = 0;
         }
+        this.play_cells(this.active_col);
         this.view.highlight_active_col(this.active_col);
     }
 }

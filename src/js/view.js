@@ -19,9 +19,7 @@ class View {
         return col
     }
 
-    constructor(selector,  width, height) {
-        this.width = width;
-        this.active_col = -1;
+    constructor(selector, width, height) {
         this.cell_views = new Map();
         this.grid = $(selector);
         this.cols = [];
