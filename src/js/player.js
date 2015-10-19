@@ -63,7 +63,10 @@ class Player {
     play_cells(x, cells) {
         for (let cell of cells) {
             if (this.cols[x].has(cell)) {
-                this.cols[x].get(cell).cloneNode().play();
+                if (typeof cell.audio == 'undefined') {
+                    cell.audio = this.cols[x].get(cell).cloneNode()
+                }
+                cell.audio.play()
             }
         }
     }
