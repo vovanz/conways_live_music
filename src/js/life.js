@@ -17,6 +17,7 @@ class Life {
             }
             this.born.update(cell.neighbours)
         }
+        this.born.diff_update(this.state);
         for (let cell of this.born) {
             let alive_neighbours = CellsSet.intersect(cell.neighbours, this.state);
             if (alive_neighbours.size != 3) {
