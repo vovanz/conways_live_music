@@ -6,7 +6,7 @@ function pad(n, width, z) {
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
-function get_penta(a) {
+function get_shift(a) {
     if (a == 0) {
         return 0
     }
@@ -28,50 +28,54 @@ function get_penta(a) {
 var get_audio_name = function (y) {
     let a = 20 - y;
     let oct = Math.floor(a / 5);
-    let shift = get_penta(a % 5);
+    let shift = get_shift(a % 5);
     let b = oct * 12 + shift;
     return 'audio/jobro__piano-ff-' + pad(b + 10, 3) + '.wav'
 };
 
 class Player {
-    get_audio(file_name) {
-        if (!this.audios.has(file_name)) {
-            let audio = new Audio(file_name);
-            this.audios.set(file_name, audio);
+    create_audio(y) {
+        if (!this.audios.has(y)) {
+            let audio = new Audio(get_audio_name(y));
+            audio.load();
+            this.loading++;
+            audio.oncanplaythrough = () => {
+                this.loading--;
+                if (this.loading == 0) {
+                    this.onready()
+                }
+            };
+            this.audios.set(y, audio);
         }
-        return this.audios.get(file_name)
     }
 
-    create_cell(col, x, y) {
-        let cell = cells_factory(x, y);
-        let audio = this.get_audio(get_audio_name(y));
-        col.set(cell, audio);
-    }
 
-    constructor(width, height) {
-        this.cols = [];
+    constructor(height, onready) {
         this.audios = new Map();
-        for (let x = 0; x < width; x++) {
-            let col = new Map();
-            for (let y = 0; y < height; y++) {
-                this.create_cell(col, x, y)
-            }
-            this.cols.push(col);
+        this.onready = onready;
+        this.loading = 0;
+        for (let y = 0; y < height; y++) {
+            this.create_audio(y);
         }
     }
 
     play_cells(x, cells) {
+        let volume = 1 / cells.size;
+        volume = Math.sqrt(volume);
+        volume = Math.sqrt(volume);
         for (let cell of cells) {
-            if (this.cols[x].has(cell)) {
-                if (typeof cell.audio == 'undefined') {
-                    cell.audio = this.cols[x].get(cell).cloneNode()
-                }
-                cell.audio.play()
+            let y = cell.y;
+            if (this.audios.has(y)) {
+                let audio = this.audios.get(y);
+                audio.pause();
+                audio.currentTime = 0;
+                audio.volume = volume;
+                audio.play();
             }
         }
+
     }
 
 }
-
 
 module.exports = Player;
