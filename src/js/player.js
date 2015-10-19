@@ -20,7 +20,7 @@ function get_penta(a) {
         return 7
     }
     if (a == 4) {
-        return 11
+        return 10
     }
 
 }
@@ -29,20 +29,28 @@ var get_audio_name = function (y) {
     let a = 20 - y;
     let oct = Math.floor(a / 5);
     let shift = get_penta(a % 5);
-    let b = oct*12 + shift;
-    return 'audio/jobro__piano-ff-' + pad(b+10, 3) + '.wav'
+    let b = oct * 12 + shift;
+    return 'audio/jobro__piano-ff-' + pad(b + 10, 3) + '.wav'
 };
 
 class Player {
+    get_audio(file_name) {
+        if (!this.audios.has(file_name)) {
+            let audio = new Audio(file_name);
+            this.audios.set(file_name, audio);
+        }
+        return this.audios.get(file_name)
+    }
+
     create_cell(col, x, y) {
         let cell = cells_factory(x, y);
-        let audio = new Audio(get_audio_name(y));
-        audio.load();
+        let audio = this.get_audio(get_audio_name(y));
         col.set(cell, audio);
     }
 
     constructor(width, height) {
         this.cols = [];
+        this.audios = new Map();
         for (let x = 0; x < width; x++) {
             let col = new Map();
             for (let y = 0; y < height; y++) {
@@ -55,8 +63,7 @@ class Player {
     play_cells(x, cells) {
         for (let cell of cells) {
             if (this.cols[x].has(cell)) {
-                this.cols[x].get(cell).play();
-                console.log(cell);
+                this.cols[x].get(cell).cloneNode().play();
             }
         }
     }
