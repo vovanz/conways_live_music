@@ -19,8 +19,7 @@ class View {
         return col
     }
 
-    constructor(selector, life, width, height) {
-        this.life = life;
+    constructor(selector,  width, height) {
         this.width = width;
         this.active_col = -1;
         this.cell_views = new Map();
@@ -32,9 +31,7 @@ class View {
                 this.create_cell(col, x, y)
             }
             this.cols.push(col);
-            this.update_alive(x);
         }
-        this.life.next_state();
     }
 
     show_alive(cell) {
@@ -46,13 +43,6 @@ class View {
         }
     }
 
-    update_alive(x) {
-        if (this.life.born.cells_by_x.has(x)) {
-            for (let cell of this.life.born.cells_by_x.get(x)) {
-                this.show_alive(cell)
-            }
-        }
-    }
 
     show_dead(cell) {
         if (!is_cell(cell)) {
@@ -63,36 +53,10 @@ class View {
         }
     }
 
-    update_dead(x) {
-        if (this.life.died.cells_by_x.has(x)) {
-            for (let cell of this.life.died.cells_by_x.get(x)) {
-                this.show_dead(cell)
-            }
-        }
-    }
-
-    highlight_active_col() {
+    highlight_active_col(x) {
         this.grid.find('.col.active').removeClass('active');
-        this.cols[this.active_col].addClass('active');
+        this.cols[x].addClass('active');
     }
-
-    set_active_col(x) {
-        this.update_alive(this.active_col);
-        this.update_dead(this.active_col);
-        this.active_col = x;
-        this.highlight_active_col();
-        return this.active_col
-    }
-
-    inc_active_col() {
-        let x = this.active_col + 1;
-        if (x >= this.width) {
-            this.life.next_state();
-            x = 0;
-        }
-        return this.set_active_col(x)
-    }
-
 }
 
 module.exports = View;

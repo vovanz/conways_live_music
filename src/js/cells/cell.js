@@ -74,4 +74,4 @@ module.exports = {
     is_cell: function (obj) {
         return obj instanceof Cell
     }
-}
+};
