@@ -75,4 +75,3 @@ module.exports = {
         return obj instanceof Cell
     }
 }
-;
