@@ -9,22 +9,17 @@ var Life = require('./life.js');
 var Controller = require('./controller.js');
 
 $(() => {
-    var glider = [
-        cells_factory(10, 10),
-        cells_factory(11, 11),
-        cells_factory(9, 12),
-        cells_factory(10, 12),
-        cells_factory(11, 12),
+    var start_set = new CellsSet();
 
-        cells_factory(1, 0),
-        cells_factory(2, 1),
-        cells_factory(0, 2),
-        cells_factory(1, 2),
-        cells_factory(2, 2)
+    for (let i = 0; i < 20; i++) {
+        for (let j = 0; j < 20; j++) {
+            if (Math.random() <= 0.3) {
+                start_set.add(cells_factory(i, j))
+            }
+        }
+    }
 
-    ];
-
-    var life = new Life(new CellsSet(glider));
+    var life = new Life(start_set);
     var view = new View('#grid', 20, 20);
     var player = new Player(20, 20);
     var controller = new Controller(life, view, player, 20);
