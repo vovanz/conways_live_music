@@ -20,8 +20,8 @@ class Controller {
     }
 
     play_cells(x) {
-        if (this.life.state.cells_by_x.has(x)) {
-            this.player.play_cells(x, this.life.state.cells_by_x.get(x))
+        if (this.life.prev_state.cells_by_x.has(x)) {
+            this.player.play_cells(x, this.life.prev_state.cells_by_x.get(x))
         }
     }
 
