@@ -60,7 +60,7 @@ class Cell {
         this[NEIGHBOURS] = new Set();
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
-                let cell = cells_factory(this.x+i, this.y+j);
+                let cell = cells_factory(this.x + i, this.y + j);
                 if (cell != this) {
                     this[NEIGHBOURS].add(cell);
                 }
@@ -69,9 +69,18 @@ class Cell {
     }
 }
 
+function is_cell(obj) {
+    return obj instanceof Cell
+}
+
+function assert_cell(cell) {
+    if (!is_cell(cell)) {
+        throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
+    }
+}
+
 module.exports = {
     cells_factory: cells_factory,
-    is_cell: function (obj) {
-        return obj instanceof Cell
-    }
+    is_cell: is_cell,
+    assert_cell: assert_cell,
 };

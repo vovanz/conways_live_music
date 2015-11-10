@@ -1,6 +1,6 @@
 var $ = require('jquery');
 var cells_factory = require('./cells/cell.js').cells_factory;
-var is_cell = require('./cells/cell.js').is_cell;
+var assert_cell = require('./cells/cell.js').assert_cell;
 
 
 class View {
@@ -33,9 +33,7 @@ class View {
     }
 
     show_alive(cell) {
-        if (!is_cell(cell)) {
-            throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
-        }
+        assert_cell(cell);
         if (this.cell_views.has(cell)) {
             this.cell_views.get(cell).addClass('alive')
         }
@@ -43,9 +41,7 @@ class View {
 
 
     show_dead(cell) {
-        if (!is_cell(cell)) {
-            throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
-        }
+        assert_cell(cell);
         if (this.cell_views.has(cell)) {
             this.cell_views.get(cell).removeClass('alive')
         }

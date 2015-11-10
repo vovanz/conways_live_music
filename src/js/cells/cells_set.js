@@ -1,4 +1,4 @@
-var is_cell = require('./cell.js').is_cell;
+var assert_cell = require('./cell.js').assert_cell;
 
 var SIZE = Symbol();
 
@@ -32,9 +32,7 @@ class CellsSet {
     }
 
     add(cell) {
-        if (!is_cell(cell)) {
-            throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
-        }
+        assert_cell(cell);
         if (!this.cells_by_x.has(cell.x)) {
             this.cells_by_x.set(cell.x, new Set())
         }
@@ -45,9 +43,7 @@ class CellsSet {
     }
 
     has(cell) {
-        if (!is_cell(cell)) {
-            throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
-        }
+        assert_cell(cell);
         if (!this.cells_by_x.has(cell.x)) {
             return false
         }
@@ -55,9 +51,7 @@ class CellsSet {
     }
 
     delete(cell) {
-        if (!is_cell(cell)) {
-            throw new TypeError('Cell required, got ' + (typeof cell) + ' instead')
-        }
+        assert_cell(cell);
         if (!this.has(cell)) {
             return false
         }
