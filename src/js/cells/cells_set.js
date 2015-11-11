@@ -69,17 +69,17 @@ class CellsSet {
 
     static union(...cells_sets) {
         let result = new CellsSet();
-        for (let extended_set of cells_sets) {
-            result.update(extended_set)
+        for (let cells_set of cells_sets) {
+            result.update(cells_set)
         }
         return result
     }
 
     static intersect(base_set, ...cells_sets) {
         let result = new CellsSet(base_set);
-        for (let extended_set of cells_sets) {
+        for (let cells_set of cells_sets) {
             for (let obj of result) {
-                if (!extended_set.has(obj)) {
+                if (!cells_set.has(obj)) {
                     result.delete(obj)
                 }
             }
