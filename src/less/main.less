@@ -7,3 +7,26 @@ html, body {
   color: @color-text;
   text-align: center;
 }
+
+.button-wrapper {
+  display: inline-block;
+  background-color: @color-disabled;
+  border: 5px solid @color-border;
+  border-radius: 15px;
+  color: @color-enabled;
+  font-weight: bold;
+  font-size: 50px;
+  margin: 0 0 21px;
+  padding: 0 10px;
+  .icon {
+    float: left;
+    border-left: 28px solid @color-enabled;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    margin: 8px 8px 8px 5px;
+  }
+  .play-pause {
+    float: left;
+    font-family: sans-serif;
+  }
+}
